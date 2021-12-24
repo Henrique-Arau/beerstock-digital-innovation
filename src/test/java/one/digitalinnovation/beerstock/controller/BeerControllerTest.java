@@ -174,7 +174,7 @@ public class BeerControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
-
+    //Testando os increments
     @Test
     void whenPATCHIsCalledToIncrementDiscountThenOKstatusIsReturned() throws Exception {
         QuantityDTO quantityDTO = QuantityDTO.builder()
