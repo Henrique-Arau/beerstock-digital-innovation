@@ -47,7 +47,7 @@ public class BeerServiceTest {
     private BeerService beerService;
 
 
-    //Primeiro teste
+    //Primeiro teste (informação do produto)
     @Test
     void whenBeerInformedThenItShouldBeCreated () throws BeerAlreadyRegisteredException {
         // given
@@ -68,7 +68,7 @@ public class BeerServiceTest {
 
     }
 
-    //Segundo teste
+    //Segundo teste (registros)
     @Test
     void whenAlreadyRegisteredBeerInformedThenAnExceptionShouldBeThrown() {
         // given
@@ -82,7 +82,7 @@ public class BeerServiceTest {
         assertThrows(BeerAlreadyRegisteredException.class, () -> beerService.createBeer(expectedBeerDTO));
     }
 
-    //Terceiro teste
+    //Terceiro teste (validação)
     @Test
     void whenValidBeerNameIsGivenThenReturnABeer() throws BeerNotFoundException {
         // given
@@ -98,6 +98,7 @@ public class BeerServiceTest {
         assertThat(foundBeerDTO, is(equalTo(expectedFoundBeerDTO)));
     }
 
+    //quarto teste (registros)
     @Test
     void whenNotRegisteredBeerNameIsGivenThenThrowAnException() {
         // given
@@ -110,6 +111,7 @@ public class BeerServiceTest {
         assertThrows(BeerNotFoundException.class, () -> beerService.findByName(expectedFoundBeerDTO.getName()));
     }
 
+    //quinto teste (list)
     @Test
     void whenListBeerIsCalledThenReturnAListOfBeers() {
         // given
@@ -126,6 +128,7 @@ public class BeerServiceTest {
         assertThat(foundListBeersDTO.get(0), is(equalTo(expectedFoundBeerDTO)));
     }
 
+    //sexto teste (list)
     @Test
     void whenListBeerIsCalledThenReturnAnEmptyListOfBeers() {
         //when
@@ -136,7 +139,7 @@ public class BeerServiceTest {
 
         assertThat(foundListBeersDTO, is(empty()));
     }
-
+    //setimo teste (exclusão)
     @Test
     void whenExclusionIsCalledWithValidIdThenABeerShouldBeDeleted() throws BeerNotFoundException{
         // given
@@ -154,6 +157,7 @@ public class BeerServiceTest {
         verify(beerRepository, times(1)).deleteById(expectedDeletedBeerDTO.getId());
     }
 
+    //oitavo teste (incrementos)
     @Test
     void whenIncrementIsCalledThenIncrementBeerStock() throws BeerNotFoundException, BeerStockExceededException {
         //given
@@ -173,7 +177,7 @@ public class BeerServiceTest {
         assertThat(expectedQuantityAfterIncrement, equalTo(incrementedBeerDTO.getQuantity()));
         assertThat(expectedQuantityAfterIncrement, lessThan(expectedBeerDTO.getMax()));
     }
-
+    //nono teste (incrementos)
     @Test
     void whenIncrementIsGreatherThanMaxThenThrowException() {
         BeerDTO expectedBeerDTO = BeerDTOBuilder.builder().build().toBeerDTO();
@@ -184,7 +188,7 @@ public class BeerServiceTest {
         int quantityToIncrement = 80;
         assertThrows(BeerStockExceededException.class, () -> beerService.increment(expectedBeerDTO.getId(), quantityToIncrement));
     }
-
+    //decimo teste (incrementos)
     @Test
     void whenIncrementAfterSumIsGreatherThanMaxThenThrowException() {
         BeerDTO expectedBeerDTO = BeerDTOBuilder.builder().build().toBeerDTO();
@@ -196,6 +200,7 @@ public class BeerServiceTest {
         assertThrows(BeerStockExceededException.class, () -> beerService.increment(expectedBeerDTO.getId(), quantityToIncrement));
     }
 
+    //decimo primeiro teste  (incrementos)
     @Test
     void whenIncrementIsCalledWithInvalidIdThenThrowException() {
         int quantityToIncrement = 10;
