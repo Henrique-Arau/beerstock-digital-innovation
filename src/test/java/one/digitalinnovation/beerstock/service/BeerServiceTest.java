@@ -32,6 +32,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+//aplicando os testes
+
 @SuppressWarnings("ALL")
 @ExtendWith(MockitoExtension.class)
 public class BeerServiceTest {
